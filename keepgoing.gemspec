@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = <<~DESC
     This gem is intended for use in a single file Ruby script that uses bundler/inline.
     You start your script once with `ruby your-script.rb` and keepgoing will take control,
-    and re-run you script every time you save your script.
+    and re-run your script every time you save your script.
     You can concentrate on tinkering, while keepgoing will, well keep going,
     providing you with a fast and effortless feedback loop for your ruby experiments.
   DESC
