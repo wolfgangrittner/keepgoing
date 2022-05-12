@@ -1,5 +1,7 @@
 # Keepgoing
 
+https://user-images.githubusercontent.com/467114/168008226-333aeec1-2318-42c1-876b-33096f5010f0.mp4
+
 keepgoing uses [guard](https://github.com/guard/guard) to tighten the feedback loop on your single-file Ruby script that uses [bundler/inline](https://bundler.io/guides/bundler_in_a_single_file_ruby_script.html).  
 When added as a gem to your script, it will run your script once when started like you are used to, but it won't exit and rather keep it going and re-run it every time you modify your script. You keep tinkering and once you save your script runs again and you 💥 immediately see the result 🤯.
 
