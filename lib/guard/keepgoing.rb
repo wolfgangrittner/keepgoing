@@ -16,6 +16,7 @@ module ::Guard
     def start
       @runs = 1
       puts "Hi! I'll keepgoing until you press Ctrl+C. Just edit and save away, you can do this 🎉\n\n"
+      setup_interrupt_handler
       run_all
     end
 
@@ -31,11 +32,39 @@ module ::Guard
     private
 
     def do_run
+      kill_running
+
       @runs += 1
-      load options[:file]
+      fork_and_load
     rescue ScriptError, StandardError => e
       # prevent any script errors from stopping guard/keepgoing, but print error
       puts e.inspect
+    end
+
+    def kill_running
+      return unless @pid
+
+      Process.kill("HUP", @pid)
+    rescue Errno::ESRCH, RangeError
+      # process was probably already gone, ignore
+    ensure
+      @pid = nil
+    end
+
+    def fork_and_load
+      @pid = fork do
+        Signal.trap("HUP") { exit }
+        load options[:file]
+      end
+      # detach script execution to give control back to guard
+      Process.detach(@pid)
+    end
+
+    def setup_interrupt_handler
+      Signal.trap("INT") do
+        kill_running
+        exit
+      end
     end
   end
 end
