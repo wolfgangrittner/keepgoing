@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    keepgoing (0.1.0)
+    keepgoing (0.2.0)
       guard (~> 2.18)
 
 GEM
