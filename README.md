@@ -32,11 +32,16 @@ puts "Woohoo"
 When you run this script in a terminal with `ruby test.rb`, it will execute like it would without keepgoing, printing out "Woohoo".  
 But you'll notice it won't exit back to your terminal prompt. If you go back to your editor and change something, say add another `puts` and save, you'll notice it gets executed again and you see the results of your edit right away.
 
+### long-running or blocking scripts
+If your script has not finished running until you save the next time, whatever it is still doing will be stopped and it will be forced to exit, so keepgoing can run it again with your latest changes.  
+This could be either great, because it allows you to use keepgoing even for things that run something blocking (like a web server that's waiting for requests), or it could be unexpected if keepgoing terminates something that is just taking a long time to finish processing.  
+Anyway, be aware that when you save, your script will be restarted, no matter what.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bin/rake install`. To release a new version, update the version number in `version.rb`, and then run `bin/rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
