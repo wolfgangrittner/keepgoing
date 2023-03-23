@@ -7,7 +7,6 @@ module ::Guard
     attr_reader :runs
 
     def initialize(options = {})
-      puts options
       opts = options.dup
       @runs = 0
       super(opts) # important to call + avoid passing options Guard doesn't understand
@@ -25,7 +24,7 @@ module ::Guard
     end
 
     def run_on_modifications(_paths)
-      puts "Press Ctrl+C to quit keepgoing. Just edit and save away, you can do this 🎉\n\n"
+      puts "Press Ctrl+C to quit keepgoing. Just edit and save away, you can do this 🎉\n\n" if clear_screen_on_reload?
       do_run
     end
 
@@ -65,6 +64,10 @@ module ::Guard
         kill_running
         exit
       end
+    end
+
+    def clear_screen_on_reload?
+      @options[:clear_screen_on_reload] || false
     end
   end
 end

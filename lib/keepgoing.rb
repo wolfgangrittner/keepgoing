@@ -28,12 +28,16 @@ module Keepgoing
   # @private
   def self.guardfile
     <<~GUARDFILE
-      clearing :on
+      clearing :#{clear_screen_on_reload? ? "on" : "off"}
       interactor :off
-      guard "keepgoing", file: "#{script_file}" do
+      guard "keepgoing", file: "#{script_file}", clear_screen_on_reload: #{clear_screen_on_reload?} do
         watch("#{script_file}")
       end
     GUARDFILE
+  end
+
+  def self.clear_screen_on_reload?
+    %w[1 on true].include?(ENV["CLEAR"])
   end
 end
 
