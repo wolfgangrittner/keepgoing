@@ -53,7 +53,7 @@ module ::Guard
     def fork_and_load
       @pid = fork do
         Signal.trap("HUP") { exit }
-        load "./#{options[:file]}"
+        load "./#{options[:file]}", true
       end
       # detach script execution to give control back to guard
       Process.detach(@pid)
